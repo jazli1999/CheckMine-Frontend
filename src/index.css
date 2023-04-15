@@ -14,10 +14,17 @@ body {
     ),
     url('@assets/background.jpg');
   background-size: cover;
+  background-position: center 30px;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.all-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .search-panel {
@@ -26,5 +33,22 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-80%);
+  transform: translate(-50%, max(-100%, -15rem));
+}
+
+.number-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #c4c4c4;
+  padding: 7px 12px;
+  padding-right: 2px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.number-input > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
