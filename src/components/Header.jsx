@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <AppBar position="sticky">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <img src={CheckIcon} style={{ paddingTop: '5px', width: '120px' }} />
+        <img src={CheckIcon} width={120} style={{ paddingTop: '3px' }} />
       </Toolbar>
     </AppBar>
   );
