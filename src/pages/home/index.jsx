@@ -1,29 +1,13 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, CircularProgress, Paper, Typography } from '@mui/material';
 import Header from '@components/Header';
 
 import Search from './Search';
-import { useEffect } from 'react';
-
-const onScroll = () => {
-  // if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-  //   document.getElementById('search-header').style.height = '400px';
-  // } 
-  // if (document.body.scrollTop ) {
-  //   document.getElementById('search-header').style.height = '700px';
-  // }
-  const position = window.scrollY;
-  // console.log(document.getElementById('search-header').getBoundingClientRect().top);
-  if (position > 300) {
-    document.getElementById('search-header').style.height = '400px';
-  }
-
-};
+import Offers from './Offers';
+import { useState } from 'react';
 
 function Home() {
-  useEffect(() => {
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  });
+  const [offers, setOffers] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Box>
@@ -42,12 +26,15 @@ function Home() {
               Plan your next trip to Mallorca
             </Typography>
             <Paper elevation={3} sx={{ mt: 2, p: 3, borderRadius: '1rem' }}>
-              <Search />
+              <Search setLoading={setLoading} setOffers={setOffers} />
             </Paper>
           </Box >
         </Box>
       </Box >
-      <Box sx={{ height: '800px', width: '100%' }} />
+      <Box sx={{ height: '800px', width: '100%' }}>
+        {loading && <CircularProgress />}
+        {(!loading && offers !== null) && <Offers offers={offers} />}
+      </Box>
     </Box>
   );
 };

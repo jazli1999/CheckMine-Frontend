@@ -50,3 +50,16 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+
+.hover-paper:hover {
+  box-shadow: 
+    0px 7.5px 7.5px -5px rgba(0,0,0,0.2), 
+    0px 7.5px 10px 0px rgba(0,0,0,0.14), 
+    0px 2.5px 20px 0px rgba(0,0,0,0.12);
+}
+
+.hover-paper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

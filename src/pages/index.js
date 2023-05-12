@@ -1,4 +1,4 @@
 import Home from './home';
-import Result from './Result';
+import HotelOffers from './hotel';
 
-export { Home, Result };
+export { Home, HotelOffers };

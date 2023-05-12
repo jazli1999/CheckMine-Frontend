@@ -5,8 +5,11 @@ const router = createBrowserRouter([{
   path: '/',
   element: <Pages.Home />,
 }, {
-  path: '/result',
-  element: <Pages.Result />,
+  path: '/offers',
+  element: <Pages.Home />,
+}, {
+  path: '/hotel/:id/offers',
+  element: <Pages.HotelOffers />,
 }]);
 
 const App = () => {

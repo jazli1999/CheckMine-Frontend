@@ -23,6 +23,19 @@ const theme = createTheme({
       lineHeight: '34px',
       textTransform: 'capitalize',
     },
+    h4: {
+      fontWeight: 400,
+      fontSize: '1.5rem',
+      color: '#333333',
+      lineHeight: 1,
+    },
+    h6: {
+      fontSize: '1rem',
+      fontWeight: 'bold',
+    },
+    caption: {
+      fontSize: '13px',
+    },
   },
 });
 

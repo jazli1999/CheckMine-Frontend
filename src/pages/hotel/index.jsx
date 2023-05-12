@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import Header from '@components/Header';
 
-function Result() {
+function HotelOffers() {
   return (
     <Box>
       <Header />
@@ -10,4 +10,4 @@ function Result() {
   );
 };
 
-export default Result;
+export default HotelOffers;
