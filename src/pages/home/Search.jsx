@@ -1,6 +1,5 @@
 import {
   Box, Button,
-  CircularProgress,
   FormControl,
   Grid, IconButton, InputLabel, MenuItem,
   TextField, Typography
@@ -12,7 +11,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useGetOffersMutation } from '../../queryService';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 const NumberInput = ({ label, num, setNum }) => {
@@ -30,7 +28,7 @@ const NumberInput = ({ label, num, setNum }) => {
   )
 };
 
-const Search = ({ setLoading, setOffers }) => {
+const Search = ({ setParams }) => {
   const [searchParams] = useSearchParams();
 
   const [airport, setAirport] = useState(searchParams.get('airport') ?? '');
@@ -91,17 +89,13 @@ const Search = ({ setLoading, setOffers }) => {
     'ZRH',
   ];
 
-  const [getOffers] = useGetOffersMutation();
   const navigate = useNavigate();
-
   const noDateBeforeDeparture = (date) => date < start;
-  const queryOffers = (params) => {
-    setLoading(true);
-    getOffers(params).then((resp) => {
-      setOffers(resp.data);
-      setLoading(false);
-    });
-  }
+
+  const clearForm = () => {
+    navigate('/');
+    setParams(null);
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -112,20 +106,18 @@ const Search = ({ setLoading, setOffers }) => {
       duration,
       start: start.toISOString().replace('+', '%2b'),
       end: end.toISOString().replace('+', '%2b'),
-      page: 1,
-      limit: 12,
     };
     navigate({
       pathname: '/offers',
       search: `?${Object.keys(params).map((key) => `${key}=${params[key]}`).join('&')}`
     });
-    queryOffers(params);
+    setParams(params);
   };
 
   useEffect(() => {
     const params = {};
     [...searchParams.entries()].forEach((param) => params[param[0]] = param[1]);
-    if (document.location.pathname === '/offers') queryOffers(params);
+    if (document.location.pathname === '/offers') setParams(params);
   }, []);
 
   return (
@@ -167,7 +159,10 @@ const Search = ({ setLoading, setOffers }) => {
           </LocalizationProvider>
         </Grid>
       </Grid>
-      <Box sx={{ width: { sx: '100%', md: 'fit-content' }, m: 'auto', mt: 2 }}>
+      <Box display="flex" gap={2} sx={{ width: { sx: '100%', md: 'fit-content' }, m: 'auto', mt: 2 }}>
+        <Button onClick={clearForm} variant="outlined" size="large" sx={{ height: '48px' }} fullWidth>
+          Clear
+        </Button>
         <Button type="submit" variant="contained" size="large" sx={{ height: '48px' }} fullWidth>
           Search
         </Button>

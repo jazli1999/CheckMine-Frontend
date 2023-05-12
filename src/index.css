@@ -4,9 +4,6 @@ body {
 }
 
 #search-header {
-  height: 700px;
-  top: 64;
-  min-height: fit-content;
   background-image:
     linear-gradient(to bottom, 
       rgba(0, 0, 0, 0), 
@@ -32,6 +29,8 @@ body {
 .search-panel {
   width: 60%;
   min-width: 380px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .number-input {

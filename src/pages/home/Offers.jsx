@@ -1,5 +1,9 @@
-import { Box, Button, ButtonBase, Grid, Link, Paper, Rating, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Link, Pagination, Paper, Rating, Typography } from "@mui/material";
+import { useGetOffersMutation } from '../../queryService';
 import HotelIcon from '@assets/hotel.svg';
+import { useEffect, useState } from "react";
+
+import EmptyIcon from '@assets/empty.svg';
 
 const OfferCard = ({ offer }) => {
   const { hotelid: id, hotelname: name, hotelstars: stars, min: price, count } = offer;
@@ -25,17 +29,67 @@ const OfferCard = ({ offer }) => {
   )
 };
 
-const Offers = ({ offers }) => {
-  console.log(offers);
+const Offers = ({ params }) => {
+  const [loading, setLoading] = useState(false);
+  const [offers, setOffers] = useState(null);
+  const [page, setPage] = useState(1);
+
+  const [getOffers] = useGetOffersMutation();
+
+  const updateOffer = (page) => {
+    setLoading(true);
+    setOffers(null);
+    getOffers({ ...params, limit: 12, page }).then((resp) => {
+      setOffers(resp.data);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    updateOffer(page);
+  }, [params, page]);
+
   return (
-    <Box sx={{ m: 2 }}>
-      <Grid container spacing={2} sx={{ alignItems: 'stretch' }}>
-        {offers.map((offer) => (
-          <Grid item xs={12} sm={6} md={4} xl={3} sx={{ alignItems: 'stretch' }}>
-            <OfferCard key={offer.hotelid} offer={offer} />
+    <Box sx={{ m: 3 }}>
+      {loading && (
+        <div style={{ textAlign: 'center' }}><CircularProgress sx={{ m: 3 }} /></div>
+      )}
+      {(offers !== null && offers.data.length > 0) && (
+        <>
+          <Grid container spacing={2} sx={{ alignItems: 'stretch' }}>
+            {offers.data.map((offer) => (
+              <Grid key={offer.hotelid} item xs={12} sm={6} md={4} xl={3} sx={{ alignItems: 'stretch' }}>
+                <OfferCard key={offer.hotelid} offer={offer} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+          <div style={{ textAlign: 'center' }}>
+            <Pagination
+              page={page}
+              onChange={(_, newPage) => setPage(newPage)}
+              sx={{ margin: 'auto', width: 'fit-content', mt: 3 }}
+              count={parseInt(offers.count / 12) + 1}
+              shape="rounded"
+            />
+          </div>
+        </>
+      )}
+      {(offers !== null && offers.data.length === 0) && (
+        <div
+          style={{
+            height: '200px',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5rem',
+          }}
+        >
+          <img src={EmptyIcon} width={120} style={{ paddingTop: '3px' }} />
+          <Typography variant="caption">No available trip offers</Typography>
+        </div>
+      )}
     </Box>
   )
 };

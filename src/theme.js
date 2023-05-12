@@ -35,6 +35,7 @@ const theme = createTheme({
     },
     caption: {
       fontSize: '13px',
+      color: 'grey',
     },
   },
 });
