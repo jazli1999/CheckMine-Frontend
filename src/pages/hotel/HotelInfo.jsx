@@ -17,8 +17,8 @@ const HotelInfo = ({ hotel }) => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box display="flex" sx={{ gap: 3, alignItems: 'start', m: '2rem 5rem' }}>
+    <Box sx={{ width: '100%', boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.15)' }}>
+      <Box display="flex" sx={{ gap: 3, alignItems: 'start', p: '2rem 5rem' }}>
         <img src={HotelIcon} width={60} />
         <Box>
           <Box display="flex" sx={{ alignItems: 'end', minHeight: '36px' }}>
@@ -26,7 +26,7 @@ const HotelInfo = ({ hotel }) => {
           </Box>
           <Rating value={hotel.hotelstars} sx={{ mt: '0.2rem' }} />
           <Box sx={{ pl: '4px', mt: 1 }}>
-            <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
+            <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
               From&nbsp;&nbsp;<b>{new Date(params.start).toLocaleString('en-US', options)}</b>
               &nbsp;&nbsp;to&nbsp;&nbsp;<b>{new Date(params.end).toLocaleString('en-US', options)}</b>
             </Typography>

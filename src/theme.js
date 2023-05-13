@@ -1,3 +1,4 @@
+import Inter from '@assets/fonts/Inter-VariableFont_slnt,wght.ttf';
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
@@ -16,7 +17,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Helvetica, sans-serif',
+    fontFamily: 'Inter',
     h3: {
       color: 'white',
       fontSize: '30px',
@@ -28,6 +29,10 @@ const theme = createTheme({
       fontSize: '1.5rem',
       color: '#333333',
       lineHeight: 1,
+    },
+    h5: {
+      fontSize: '1.2rem',
+      fontWeight: 500,
     },
     h6: {
       fontSize: '1rem',

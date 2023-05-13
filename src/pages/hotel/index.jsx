@@ -33,7 +33,9 @@ function HotelOffers() {
       {offers !== null && (
         <>
           <HotelInfo hotel={offers.hotel} />
-          <Offers offers={offers.offers} />
+          <Box sx={{ m: 3 }}>
+            <Offers offers={offers.offers} />
+          </Box>
         </>
       )}
     </Box>
