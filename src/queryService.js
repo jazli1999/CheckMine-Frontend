@@ -11,7 +11,14 @@ export const holidayApi = createApi({
           .join('&')}`,
       method: 'GET',
     }),
+    getHotelOffers: builder.mutation({
+      query: ({ id, params }) =>
+        `hotels/${id}/offers?${Object.keys(params)
+          .map((key) => `${key}=${params[key]}`)
+          .join('&')}`,
+      method: 'GET',
+    }),
   }),
 });
 
-export const { useGetOffersMutation } = holidayApi;
+export const { useGetOffersMutation, useGetHotelOffersMutation } = holidayApi;

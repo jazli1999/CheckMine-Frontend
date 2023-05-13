@@ -33,6 +33,9 @@ const theme = createTheme({
       fontSize: '1rem',
       fontWeight: 'bold',
     },
+    body1: {
+      color: '#333333',
+    },
     caption: {
       fontSize: '13px',
       color: 'grey',

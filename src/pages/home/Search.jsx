@@ -39,8 +39,8 @@ const Search = ({ setParams }) => {
   const [children, setChildren] = useState(parseInt(searchParams.get('children') ?? '0'));
   const [adults, setAdults] = useState(parseInt(searchParams.get('adults') ?? '0'));
   const [duration, setDuration] = useState(parseInt(searchParams.get('duration') ?? '0'));
-  const [start, setStart] = useState(dayjs(searchParams.get('start') ? new Date(searchParams.get('start')) : new Date()));
-  const [end, setEnd] = useState(dayjs(searchParams.get('end') ? new Date(searchParams.get('end')) : new Date()));
+  const [start, setStart] = useState(dayjs(searchParams.get('start') ? new Date(searchParams.get('start')) : tomorrow));
+  const [end, setEnd] = useState(dayjs(searchParams.get('end') ? new Date(searchParams.get('end')) : tomorrow));
 
   const outDepAirportOptions = [
     'AMS',
@@ -122,6 +122,11 @@ const Search = ({ setParams }) => {
     setParams(params);
   };
 
+  const handleSetStart = (value) => {
+    setStart(value);
+    if (end < value) setEnd(value);
+  }
+
   useEffect(() => {
     const params = {};
     [...searchParams.entries()].forEach((param) => params[param[0]] = param[1]);
@@ -153,18 +158,18 @@ const Search = ({ setParams }) => {
           <NumberInput label="Duration" num={duration} setNum={setDuration} />
         </Grid>
         <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <FormControl required onChange={(e) => setStart(e.target.value)} fullWidth>
-              <DateTimePicker label="Earliest Departure" value={start} onChange={setStart} shouldDisableDate={noDateBeforeTomorrow} />
-            </FormControl>
-          </LocalizationProvider>
+          <FormControl required fullWidth>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker label="Earliest Departure" value={start} onChange={handleSetStart} shouldDisableDate={noDateBeforeTomorrow} />
+            </LocalizationProvider>
+          </FormControl>
         </Grid>
         <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <FormControl required onChange={(e) => setEnd(e.target.value)} fullWidth>
-              <DateTimePicker label="Latest Arrival" value={end} onChange={setEnd} shouldDisableDate={noDateBeforeDeparture} />
-            </FormControl>
-          </LocalizationProvider>
+          <FormControl required fullWidth>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimePicker label="Latest Return" value={end} onChange={setEnd} shouldDisableDate={noDateBeforeDeparture} />
+            </LocalizationProvider>
+          </FormControl>
         </Grid>
       </Grid>
       <Box display="flex" gap={2} sx={{ width: { sx: '100%', md: 'fit-content' }, m: 'auto', mt: 2 }}>
