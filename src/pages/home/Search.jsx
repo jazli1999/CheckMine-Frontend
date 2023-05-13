@@ -31,6 +31,10 @@ const NumberInput = ({ label, num, setNum }) => {
 const Search = ({ setParams }) => {
   const [searchParams] = useSearchParams();
 
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
   const [airport, setAirport] = useState(searchParams.get('airport') ?? '');
   const [children, setChildren] = useState(parseInt(searchParams.get('children') ?? '0'));
   const [adults, setAdults] = useState(parseInt(searchParams.get('adults') ?? '0'));
@@ -91,10 +95,14 @@ const Search = ({ setParams }) => {
 
   const navigate = useNavigate();
   const noDateBeforeDeparture = (date) => date < start;
+  const noDateBeforeTomorrow = (date) => date < dayjs(today);
 
   const clearForm = () => {
     navigate('/');
     setParams(null);
+    setAirport('');
+    setStart(dayjs(tomorrow));
+    setEnd(dayjs(tomorrow));
   };
 
   const submitForm = (e) => {
@@ -147,7 +155,7 @@ const Search = ({ setParams }) => {
         <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <FormControl required onChange={(e) => setStart(e.target.value)} fullWidth>
-              <DateTimePicker label="Earliest Departure" value={start} onChange={setStart} disablePast />
+              <DateTimePicker label="Earliest Departure" value={start} onChange={setStart} shouldDisableDate={noDateBeforeTomorrow} />
             </FormControl>
           </LocalizationProvider>
         </Grid>
