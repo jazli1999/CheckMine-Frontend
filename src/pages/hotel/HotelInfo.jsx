@@ -1,4 +1,4 @@
-import { Box, Rating, Typography } from '@mui/material';
+import { Box, Link, Rating, Typography } from '@mui/material';
 import { useSearchParams } from "react-router-dom";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -36,6 +36,12 @@ const HotelInfo = ({ hotel }) => {
             <Typography variant="body1" sx={{ lineHeight: 2 }}>
               <b>{params.adults}</b> adult(s) and <b>{params.children}</b> child(ren)
             </Typography>
+            <Link
+              href={`/offers?${document.location.href.split('offers?')[1]}`}
+              sx={{ textDecoration: 'none' }}
+            >
+              <Typography variant="h6" sx={{ pt: '1rem', fontWeight: 500 }}>See offers from other hotels</Typography>
+            </Link>
           </Box>
         </Box>
       </Box>

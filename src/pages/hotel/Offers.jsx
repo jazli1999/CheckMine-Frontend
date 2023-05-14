@@ -18,7 +18,7 @@ const IconTitle = ({ icon, text, enabled }) => {
 
 const getReadable = (str) => {
   const mapping = {
-    ACCORDINGDESCTIPTION: 'According Description',
+    ACCORDINGDESCRIPTION: 'According Description',
     ALLINCLUSIVE: 'All Inclusive',
     ALLINCLUSIVEPLUS: 'All Inclusive Plus',
     BREAKFAST: 'Breakfast',
@@ -180,12 +180,10 @@ const OfferCard = ({ offer }) => {
   );
 };
 
-const Offers = ({ offers }) => {
-  return (
-    <Box sx={{ width: '100%' }}>
-      {offers.map((offer) => <OfferCard key={offer.offer_id} offer={offer} />)}
-    </Box>
-  )
-};
+const Offers = ({ offers }) => (
+  <Box sx={{ width: '100%' }}>
+    {offers.map((offer) => <OfferCard key={offer.offer_id} offer={offer} />)}
+  </Box>
+);
 
 export default Offers;
