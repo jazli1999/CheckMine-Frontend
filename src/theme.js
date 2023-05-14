@@ -1,4 +1,3 @@
-import Inter from '@assets/fonts/Inter-VariableFont_slnt,wght.ttf';
 import { createTheme } from '@mui/material';
 
 const theme = createTheme({
