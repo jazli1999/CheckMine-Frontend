@@ -8,7 +8,7 @@ import EmptyIcon from '@assets/empty.svg';
 const OfferCard = ({ offer }) => {
   const { hotelid: id, hotelname: name, hotelstars: stars, min: price, count } = offer;
   return (
-    <Paper className="hover-paper" sx={{ p: 2, borderRadius: '0.6rem' }} elevation={3}>
+    <Paper className="hover-paper" sx={{ p: 2, borderRadius: '0.6rem', minHeight: '118px' }} elevation={3}>
       <Box display="flex" sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Box display="flex" gap={1} sx={{ alignItems: 'bottom' }}>
           <img src={HotelIcon} width={50} />
