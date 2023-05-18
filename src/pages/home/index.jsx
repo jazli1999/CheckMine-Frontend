@@ -23,7 +23,7 @@ function Home() {
     } else {
       if (header.style.position === 'absolute') {
         header.style.position = 'relative';
-        header.style.height = '400px';
+        header.style.minHeight = '400px';
         header.style.top = 0;
         header.style.right = 'auto';
         header.style.bottom = 'auto';
